@@ -9,14 +9,14 @@
 *.iml
 .gradle
 CEM/local.properties
-CEM/.idea/caches
-CEM/.idea/libraries
+CEM/.idea/caches/
+CEM/.idea/libraries/
 CEM/.idea/modules.xml
 CEM/.idea/workspace.xml
 CEM/.idea/navEditor.xml
 CEM/.idea/assetWizardSettings.xml
 .DS_Store
-CEM/build
+CEM/build/
 CEM/captures
 .externalNativeBuild
 .cxx
