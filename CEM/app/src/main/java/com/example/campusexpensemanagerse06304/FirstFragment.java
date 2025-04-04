@@ -1,4 +1,4 @@
-package com.example.cem;
+package com.example.campusexpensemanagerse06304;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.cem.databinding.FragmentFirstBinding;
+import com.example.campusexpensemanagerse06304.databinding.FragmentFirstBinding;
 
 public class FirstFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.example.cem;
+package com.example.campusexpensemanagerse06304;
 
 import android.os.Bundle;
 
@@ -13,7 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.cem.databinding.ActivityMainBinding;
+import com.example.campusexpensemanagerse06304.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;

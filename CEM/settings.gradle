@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CEM"
+rootProject.name = "CampusExpense Manager SE06304"
 include ':app'

@@ -1,4 +1,4 @@
-package com.example.cem;
+package com.example.campusexpensemanagerse06304;
 
 import org.junit.Test;
 
