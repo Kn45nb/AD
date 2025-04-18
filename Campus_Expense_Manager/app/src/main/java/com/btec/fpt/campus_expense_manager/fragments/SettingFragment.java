@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ public class SettingFragment extends Fragment {
     private DatabaseHelper databaseHelper;
     private TextView tvHello;
     private Button btnLogout, btnChangePass;
+    private Button btnViewInfo, btnDeleteAccount, btnAppInfo;
+    private Switch switchNotification;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -43,6 +46,12 @@ public class SettingFragment extends Fragment {
         tvHello = view.findViewById(R.id.tv_name);
         btnLogout = view.findViewById(R.id.btnlogout);
         btnChangePass = view.findViewById(R.id.btnchangepass);
+
+        // Initialize new buttons and switch
+        btnViewInfo = view.findViewById(R.id.btnViewInfo);
+        btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount);
+        btnAppInfo = view.findViewById(R.id.btnAppInfo);
+        switchNotification = view.findViewById(R.id.switchNotification);
 
         // Get email and password from SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -72,6 +81,22 @@ public class SettingFragment extends Fragment {
         // Set up button listeners
         btnLogout.setOnClickListener(v -> handleLogout());
         btnChangePass.setOnClickListener(v -> loadFragment(new ChangePasswordFragment()));
+
+        // Set up new button listeners
+        btnViewInfo.setOnClickListener(v -> loadFragment(new ViewInfoFragment()));
+        btnDeleteAccount.setOnClickListener(v -> loadFragment(new DeleteAccountFragment()));
+        btnAppInfo.setOnClickListener(v -> loadFragment(new AppInfoFragment()));
+
+        // Handle notification switch
+        SharedPreferences notifyPrefs = requireActivity().getSharedPreferences("NotifyPrefs", MODE_PRIVATE);
+        boolean isNotify = notifyPrefs.getBoolean("notification_enabled", true);
+        switchNotification.setChecked(isNotify);
+        switchNotification.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferences.Editor editor = notifyPrefs.edit();
+            editor.putBoolean("notification_enabled", isChecked);
+            editor.apply();
+            Toast.makeText(getContext(), isChecked ? "Notifications enabled" : "Notifications disabled", Toast.LENGTH_SHORT).show();
+        });
 
         return view;
     }
