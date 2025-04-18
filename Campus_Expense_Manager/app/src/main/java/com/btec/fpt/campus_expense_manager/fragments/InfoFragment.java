@@ -15,8 +15,7 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         TextView tvInfo = view.findViewById(R.id.tv_info);
-        String version = "Version: " + BuildConfig.VERSION_NAME;
-        tvInfo.setText("Campus Expense Manager\n" + version);
+        tvInfo.setText("Campus Expense Manager App\nVersion: rev 2.0\nCopyright © 2024");
         return view;
     }
 }
