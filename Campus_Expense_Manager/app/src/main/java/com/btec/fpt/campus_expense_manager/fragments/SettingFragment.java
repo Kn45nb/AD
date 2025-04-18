@@ -26,6 +26,8 @@ public class SettingFragment extends Fragment {
     private DatabaseHelper databaseHelper;
     private TextView tvHello;
     private Button btnLogout, btnChangePass;
+    // Thêm các nút mới
+    private Button btnProfile, btnNoi, btnInfo;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -43,6 +45,11 @@ public class SettingFragment extends Fragment {
         tvHello = view.findViewById(R.id.tv_name);
         btnLogout = view.findViewById(R.id.btnlogout);
         btnChangePass = view.findViewById(R.id.btnchangepass);
+
+        // Khởi tạo các nút mới
+        btnProfile = view.findViewById(R.id.btn_profile);
+        btnNoi = view.findViewById(R.id.btn_noi);
+        btnInfo = view.findViewById(R.id.btn_info);
 
         // Get email and password from SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -72,6 +79,9 @@ public class SettingFragment extends Fragment {
         // Set up button listeners
         btnLogout.setOnClickListener(v -> handleLogout());
         btnChangePass.setOnClickListener(v -> loadFragment(new ChangePasswordFragment()));
+        btnProfile.setOnClickListener(v -> loadFragment(new ProfileFragment()));
+        btnNoi.setOnClickListener(v -> loadFragment(new NoiFragment()));
+        btnInfo.setOnClickListener(v -> loadFragment(new InfoFragment()));
 
         return view;
     }
