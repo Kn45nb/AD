@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set OV (%)"
+        android:text="Over threshold warning (%)"
         android:textSize="18sp"
         android:layout_marginBottom="12dp"/>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Enter OV (1-100%)"
+        android:hint="(1-100%)"
         android:maxLength="3"
         android:layout_marginBottom="16dp"/>
 
