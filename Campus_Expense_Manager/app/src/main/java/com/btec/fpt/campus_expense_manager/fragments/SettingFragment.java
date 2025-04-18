@@ -28,6 +28,8 @@ public class SettingFragment extends Fragment {
     private Button btnLogout, btnChangePass;
     // Thêm các nút mới
     private Button btnProfile, btnNoi, btnInfo;
+    // Thêm nút Over
+    private Button btnOver;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -50,6 +52,8 @@ public class SettingFragment extends Fragment {
         btnProfile = view.findViewById(R.id.btn_profile);
         btnNoi = view.findViewById(R.id.btn_noi);
         btnInfo = view.findViewById(R.id.btn_info);
+        // Khởi tạo nút Over
+        btnOver = view.findViewById(R.id.btn_over);
 
         // Get email and password from SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -82,6 +86,8 @@ public class SettingFragment extends Fragment {
         btnProfile.setOnClickListener(v -> loadFragment(new ProfileFragment()));
         btnNoi.setOnClickListener(v -> loadFragment(new NoiFragment()));
         btnInfo.setOnClickListener(v -> loadFragment(new InfoFragment()));
+        // Xử lý mở OverFragment
+        btnOver.setOnClickListener(v -> loadFragment(new OverFragment()));
 
         return view;
     }
