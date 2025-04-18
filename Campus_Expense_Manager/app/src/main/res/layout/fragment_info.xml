@@ -8,6 +8,8 @@
         android:id="@+id/tv_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Info Fragment"
-        android:textSize="24sp"/>
+        android:text="Campus Expense Manager"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"/>
 </LinearLayout>
