@@ -26,6 +26,7 @@ public class SettingFragment extends Fragment {
     private DatabaseHelper databaseHelper;
     private TextView tvHello;
     private Button btnLogout, btnChangePass;
+    private Button btnViewInfo, btnDeleteAccount, btnAppInfo, btnNotification;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -43,6 +44,12 @@ public class SettingFragment extends Fragment {
         tvHello = view.findViewById(R.id.tv_name);
         btnLogout = view.findViewById(R.id.btnlogout);
         btnChangePass = view.findViewById(R.id.btnchangepass);
+
+        // Initialize new buttons (make sure to add these IDs in your fragment_setting.xml)
+        btnViewInfo = view.findViewById(R.id.btn_view_info);
+        btnDeleteAccount = view.findViewById(R.id.btn_delete_account);
+        btnAppInfo = view.findViewById(R.id.btn_app_info);
+        btnNotification = view.findViewById(R.id.btn_notification);
 
         // Get email and password from SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -72,6 +79,12 @@ public class SettingFragment extends Fragment {
         // Set up button listeners
         btnLogout.setOnClickListener(v -> handleLogout());
         btnChangePass.setOnClickListener(v -> loadFragment(new ChangePasswordFragment()));
+
+        // New feature buttons
+        btnViewInfo.setOnClickListener(v -> loadFragment(new ViewInformationFragment()));
+        btnDeleteAccount.setOnClickListener(v -> loadFragment(new DeleteAccountFragment()));
+        btnAppInfo.setOnClickListener(v -> loadFragment(new ApplicationInfoFragment()));
+        btnNotification.setOnClickListener(v -> loadFragment(new NotificationSettingFragment()));
 
         return view;
     }
