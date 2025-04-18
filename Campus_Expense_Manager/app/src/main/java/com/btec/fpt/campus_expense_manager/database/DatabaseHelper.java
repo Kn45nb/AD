@@ -237,7 +237,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         transCursor.close();
 
         if (hasTransaction) {
-            android.widget.Toast.makeText(context, "Cannot delete category as it is in use by transactions.", android.widget.Toast.LENGTH_SHORT).show();
+            // android.widget.Toast.makeText(context, "Cannot delete category as it is in use by transactions.", android.widget.Toast.LENGTH_SHORT).show();
+            // @Kn45nb: Thay thế bằng cách sử dụng Toast trong Activity hoặc Fragment
             db.close();
             return false; // Không xóa được vì có transaction sử dụng
         }
