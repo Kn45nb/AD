@@ -69,6 +69,25 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/green"
                 android:text="Logout" />
+
+            <Button
+                android:id="@+id/btn_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:layout_marginTop="12dp"/>
+            <Button
+                android:id="@+id/btn_noi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Noi"
+                android:layout_marginTop="12dp"/>
+            <Button
+                android:id="@+id/btn_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Info"
+                android:layout_marginTop="12dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
