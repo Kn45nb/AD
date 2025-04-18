@@ -31,7 +31,7 @@ public class ChangerProfileFragment extends Fragment {
         edtEmail = view.findViewById(R.id.edt_email);
         btnSave = view.findViewById(R.id.btn_save_profile);
 
-        // Lấy email hiện tại
+        // @Kn45nb Lấy email hiện tại 
         String email = DataStatic.email;
         if (email == null || email.isEmpty()) {
             SharedPreferences prefs = requireActivity().getSharedPreferences("UserPrefs", 0);
@@ -41,7 +41,7 @@ public class ChangerProfileFragment extends Fragment {
         DatabaseHelper db = new DatabaseHelper(getContext());
         User user = db.getUserByEmail(email);
 
-        // Hiển thị dữ liệu hiện tại (nếu có)
+        // @Kn45nb Hiển thị dữ liệu hiện tại dàng chữ mờ mờ (nếu có)
         if (user != null) {
             edtFirstName.setHint(user.getFirstName());
             edtLastName.setHint(user.getLastName());
