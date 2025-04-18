@@ -216,6 +216,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean deleteCategory(int categoryId) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // Lấy tên category theo id
+        String categoryName = null;
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_CATEGORY_NAME + " FROM " + TABLE_CATEGORY + " WHERE " + COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)});
+        if (cursor.moveToFirst()) {
+            categoryName = cursor.getString(0);
+        }
+        cursor.close();
+
+        // Nếu không tìm thấy category, trả về false
+        if (categoryName == null) {
+            db.close();
+            return false;
+        }
+
+        // Kiểm tra xem có transaction nào đang dùng category này không
+        Cursor transCursor = db.rawQuery("SELECT 1 FROM " + TABLE_TRANSACTION + " WHERE " + COLUMN_CATEGORY + " = ? LIMIT 1", new String[]{categoryName});
+        boolean hasTransaction = transCursor.moveToFirst();
+        transCursor.close();
+
+        if (hasTransaction) {
+            android.widget.Toast.makeText(context, "Cannot delete category as it is in use by transactions.", android.widget.Toast.LENGTH_SHORT).show();
+            db.close();
+            return false; // Không xóa được vì có transaction sử dụng
+        }
+
         int rowsDeleted = db.delete(TABLE_CATEGORY, COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)});
         db.close();
         return rowsDeleted > 0;
