@@ -52,7 +52,7 @@ public class OverFragment extends Fragment {
                 return;
             }
             prefs.edit().putInt(KEY_OV, value).apply();
-            Toast.makeText(getContext(), "Saved OV: " + value + "%", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Saved Over Rate: " + value + "%", Toast.LENGTH_SHORT).show();
         });
 
         return view;
