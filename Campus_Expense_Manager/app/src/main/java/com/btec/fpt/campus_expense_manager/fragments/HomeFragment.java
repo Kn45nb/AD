@@ -169,10 +169,10 @@ public class HomeFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Transaction transaction = transactions.get(position);
-            holder.tvDate.setText(transaction.getDate());
-            holder.tvCategory.setText(transaction.getCategory());
+            holder.tvDate.setText(transaction.getCategoory());
+            holder.tvCategory.setText(transaction.getDescription());
             holder.tvAmount.setText("$" + transaction.getAmount());
-            holder.tvType.setText(transaction.getType() == 0 ? "Outcome" : "Income");
+            holder.tvType.setText(transaction.getDate());
             holder.ivIcon.setImageResource(transaction.getType() == 0 ? R.drawable.ic_outcome : R.drawable.ic_income);
         }
 
