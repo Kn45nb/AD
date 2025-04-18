@@ -217,11 +217,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean deleteCategory(int categoryId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Lấy tên category theo id
+        // Lấy tên category và email theo id
         String categoryName = null;
-        Cursor cursor = db.rawQuery("SELECT " + COLUMN_CATEGORY_NAME + " FROM " + TABLE_CATEGORY + " WHERE " + COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)});
+        String categoryEmail = null;
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_CATEGORY_NAME + ", " + COLUMN_EMAIL + " FROM " + TABLE_CATEGORY + " WHERE " + COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)});
         if (cursor.moveToFirst()) {
             categoryName = cursor.getString(0);
+            categoryEmail = cursor.getString(1);
         }
         cursor.close();
 
@@ -231,16 +233,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
 
-        // Kiểm tra xem có transaction nào đang dùng category này không
-        Cursor transCursor = db.rawQuery("SELECT 1 FROM " + TABLE_TRANSACTION + " WHERE " + COLUMN_CATEGORY + " = ? LIMIT 1", new String[]{categoryName});
+        // Kiểm tra xem có transaction nào đang dùng category này không (so sánh cả tên và email)
+        String checkQuery;
+        String[] checkArgs;
+        if (categoryEmail == null) {
+            // Nếu là category mặc định (email null), kiểm tra mọi transaction có cùng tên category
+            checkQuery = "SELECT 1 FROM " + TABLE_TRANSACTION + " WHERE " + COLUMN_CATEGORY + " = ? LIMIT 1";
+            checkArgs = new String[]{categoryName};
+        } else {
+            // Nếu là category của user, kiểm tra transaction cùng tên category và email
+            checkQuery = "SELECT 1 FROM " + TABLE_TRANSACTION + " WHERE " + COLUMN_CATEGORY + " = ? AND " + COLUMN_EMAIL + " = ? LIMIT 1";
+            checkArgs = new String[]{categoryName, categoryEmail};
+        }
+        Cursor transCursor = db.rawQuery(checkQuery, checkArgs);
         boolean hasTransaction = transCursor.moveToFirst();
         transCursor.close();
 
         if (hasTransaction) {
-            // android.widget.Toast.makeText(context, "Cannot delete category as it is in use by transactions.", android.widget.Toast.LENGTH_SHORT).show();
-            // @Kn45nb: Thay thế bằng cách sử dụng Toast trong Activity hoặc Fragment
+            // Có transaction sử dụng category này, không xóa
             db.close();
-            return false; // Không xóa được vì có transaction sử dụng
+            // Có thể gửi thông báo ở Activity/Fragment nếu cần
+            return false;
         }
 
         int rowsDeleted = db.delete(TABLE_CATEGORY, COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)});
